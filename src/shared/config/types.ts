@@ -1,5 +1,3 @@
-
-
 type NoderType = {
     moniker: string,
     address: string,
@@ -27,5 +25,16 @@ export type RpcsNodeType = {
     apiIp?: string,
     evmIp?: string,
     tx_index: "on" | "off"
+}
+
+export type MapNodeType = {
+    noder: NoderType,
+    country: string,
+    city: string,
+    lat: number,
+    lon: number,
+    isp: string,
+    as: string,
+    ip: string
 }
 

@@ -1,7 +1,7 @@
 'use client'
-import {CosmosNodeType, EvmNodeType, RpcsNodeType} from "@/config/types";
+import {CosmosNodeType, EvmNodeType, RpcsNodeType} from "@/shared/config/types";
 import {useEffect, useState} from "react";
-import RpcsNodesList from "@/widgets/RpcsNodesList";
+import RpcsNodesList from "@/widgets/network-data/RpcsNodesList";
 
 type RpcsFilterType = "cosmos" | "evm"
 type BlockHistoryType = "random" | "ascending" | "descending"

@@ -1,4 +1,4 @@
-import {RpcsNodeType} from "@/config/types";
+import {RpcsNodeType} from "@/shared/config/types";
 
 
 export default function RpcsNode({noder, rpcIp, uptime, apiIp, tx_index, evmIp}: RpcsNodeType) {

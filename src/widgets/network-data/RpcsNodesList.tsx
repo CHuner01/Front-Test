@@ -1,5 +1,5 @@
 import RpcsNode from "@/entities/rpcsNode";
-import {RpcsNodeType} from "@/config/types";
+import {RpcsNodeType} from "@/shared/config/types";
 
 type RpcsNodesListType = {
     rpcsNodes: RpcsNodeType[]
