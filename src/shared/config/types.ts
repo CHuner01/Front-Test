@@ -38,3 +38,9 @@ export type MapNodeType = {
     ip: string
 }
 
+export type PercentNodeType = {
+    id: number,
+    name: string,
+    percent: number
+}
+

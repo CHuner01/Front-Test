@@ -12,7 +12,6 @@ export default function RpcsNodesList({rpcsNodes}: RpcsNodesListType) {
         <>
             {rpcsNodes.map((rpcsNode, index) => (
                 <>
-                    <p>{index}</p>
                     <RpcsNode
                         key={rpcsNode.noder.address}
                         noder={rpcsNode.noder}
