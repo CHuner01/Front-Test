@@ -14,7 +14,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         poppins: ['Poppins'],
-        pingfang: ['pingfang hk']
+        pingfang: ['Pingfang hk']
       },
       colors: {
         background: "var(--background)",

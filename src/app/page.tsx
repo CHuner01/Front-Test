@@ -1,5 +1,5 @@
 import {mapApi, rpcsApi} from "@/shared/config/api";
-import RpcsTable from "@/widgets/network-data/table";
+import RpcsTable from "@/widgets/network-data/nodesTable";
 import DataCenter from "@/widgets/map-data/dataCenter";
 
 
@@ -26,29 +26,14 @@ async function fetchMapData() {
 
 
 export default async function Home() {
-    // const response  = await fetch(mapApi);
-    // const data = await response.json();
-    // const rpcsNodes = data;
-
     const [ data1, data2] = await Promise.all([fetchNetworkData(), fetchMapData()]);
 
     return (
         <>
-            <div className="flex justify-center flex-col w-full p-4
-                text-white
-            ">
-                <div className="my-3">
-                    <p className="font-pingfang text-lg">Node Data Center</p>
-
-
-
-                </div>
-                <div className="my-3">
-                    <DataCenter mapNodes={data2}/>
-                </div>
-                <div className="my-3">
-                    <RpcsTable rpcsNodes={data1.rpcs}/>
-                </div>
+            <div className="flex min-w-0 justify-center flex-col gap-10 w-full p-4 sm:p-8 text-white">
+                <p className="font-pingfang text-xl">Node Data Center</p>
+                <DataCenter mapNodes={data2}/>
+                <RpcsTable rpcsNodes={data1.rpcs}/>
             </div>
         </>
     );

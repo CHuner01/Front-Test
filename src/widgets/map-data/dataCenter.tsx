@@ -1,9 +1,10 @@
 import {MapNodeType, PercentNodeType} from "@/shared/config/types";
 import DiagramDataCenter from "@/widgets/map-data/diagramDataCenter";
-import ModalDataCenter from "@/widgets/map-data/modalDataCenter";
 import PlusIcon from "../../../public/images/PlusIcon.svg";
 import MinusIcon from "../../../public/images/MinusIcon.svg";
+import MapImage from "../../../public/images/MapImage.svg";
 import Image from "next/image";
+
 
 type DataCenterType = {
     mapNodes : MapNodeType[]
@@ -34,23 +35,24 @@ export default function DataCenter({mapNodes}: DataCenterType) {
     });
 
     return (
-        <div className="flex flex-row">
+        <div className="flex flex-col-reverse xl:flex-row justify-between ">
             <div>
-                <DiagramDataCenter mapNodes={percentNodes.slice(0, 6)}/>
+                <DiagramDataCenter mapNodes={percentNodes}/>
             </div>
-            <div className="w-[711px] h-[434px] bg-amber-800">
-                Map
-            </div>
-            <div className="flex flex-col items-center">
-                <button className="w-[48px] h-[48px] bg-[#484848] flex items-center justify-center rounded-lg">
-                    <Image src={PlusIcon} alt="Icon" width="18" height="18" />
-                </button>
-                <button className="w-[48px] h-[48px] bg-[#484848] flex items-center justify-center rounded-lg">
-                    <Image src={MinusIcon} alt="Icon" width="18" height="2" />
-                </button>
-            </div>
+            <div className="relative w-full p-2 flex justify-center">
+                <div className=" w-[680px] flex-none overflow-hidden">
+                    <Image src={MapImage} alt="Icon" width="680" height="400" />
 
-            {/*<ModalDataCenter  mapNodes={percentNodes}/>*/}
+                </div>
+                <div className="flex flex-col gap-y-5 m-3 absolute bottom-0 right-0">
+                    <button className="w-[34px] h-[34px] sm:w-[48px] sm:h-[48px] bg-[#484848] flex items-center justify-center rounded-lg">
+                        <Image src={PlusIcon} alt="Icon" width="18" height="18" />
+                    </button>
+                    <button className="w-[34px] h-[34px] sm:w-[48px] sm:h-[48px] bg-[#484848] flex items-center justify-center rounded-lg">
+                        <Image src={MinusIcon} alt="Icon" width="18" height="2" />
+                    </button>
+                </div>
+            </div>
         </div>
     );
 }

@@ -19,3 +19,7 @@ body {
     width: 100%;
     background-color: black;
 }
+
+.flex {
+    overflow: hidden;
+}
