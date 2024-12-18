@@ -18,7 +18,7 @@ export type EvmNodeType = {
     tx_index: "on" | "off"
 }
 
-export type RpcsNodeType = {
+export interface RpcsNodeType {
     noder: NoderType,
     rpcIp?: string,
     uptime: number,
@@ -42,5 +42,10 @@ export type PercentNodeType = {
     id: number,
     name: string,
     percent: number
+}
+
+export type countryNameType = {
+    ip: string,
+    name: string
 }
 

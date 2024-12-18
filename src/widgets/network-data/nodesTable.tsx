@@ -1,12 +1,12 @@
 'use client'
-import {CosmosNodeType, EvmNodeType, RpcsNodeType} from "@/shared/config/types";
+import {CosmosNodeType, countryNameType, EvmNodeType, RpcsNodeType} from "@/shared/config/types";
 import {ChangeEvent, useEffect, useState} from "react";
 import NodesList from "@/widgets/network-data/nodesList";
 import CloseIcon from "../../../public/images/CloseIcon.svg";
 import Image from "next/image";
 
 
-type RpcsFilterType = "cosmos" | "evm"
+type RpcFilterType = "cosmos" | "evm"
 type BlockHistoryType = "random" | "ascending" | "descending"
 type IndexationFilterType = "random" | "on" | "off"
 
@@ -17,17 +17,24 @@ type RpcsArrayType = {
 }
 
 type RpcsTableType = {
-    rpcsNodes: RpcsArrayType
+    rpcsNodes: RpcsArrayType,
+    countryNames: Map<string, string>
 }
 
-export default function RpcsTable({rpcsNodes}: RpcsTableType) {
+export default function RpcsTable({rpcsNodes, countryNames}: RpcsTableType) {
 
-    const [rpcsFilter, setRpcsFilter] = useState<RpcsFilterType>("cosmos");
+    const [rpcFilter, setRpcFilter] = useState<RpcFilterType>("cosmos");
     const [indexationFilter , setIndexationFilter] = useState<IndexationFilterType>("random");
     const [blockHistoryFilter, setBlockHistoryFilter] = useState<BlockHistoryType>("random");
     const [searchMoniker, setSearchMoniker] = useState<string>("");
 
     const [sortedNodes, setSortedNodes] = useState<RpcsNodeType[]>(rpcsNodes.cosmos);
+    console.log(countryNames)
+    console.log("table")
+
+    function handleChangeRpcFilter(value: RpcFilterType) {
+        setRpcFilter(value);
+    }
 
     function handleChangeBlockHistory(event: ChangeEvent<HTMLSelectElement>) {
         const value = event.target.value as BlockHistoryType;
@@ -39,16 +46,20 @@ export default function RpcsTable({rpcsNodes}: RpcsTableType) {
         setIndexationFilter(value);
     }
 
+    function handleSearchMoniker(event: ChangeEvent<HTMLInputElement>) {
+        const value = event.target.value;
+        setSearchMoniker(value);
+    }
+
     useEffect(() => {
         CheckFilters();
-    }, [rpcsFilter, indexationFilter, blockHistoryFilter, searchMoniker]);
+    }, [rpcFilter, indexationFilter, blockHistoryFilter, searchMoniker]);
 
     function CheckFilters() {
-        console.log(rpcsFilter, indexationFilter, blockHistoryFilter, searchMoniker)
 
         let filteredNodes: RpcsNodeType[];
 
-        if (rpcsFilter === "cosmos") {
+        if (rpcFilter === "cosmos") {
             filteredNodes = rpcsNodes.cosmos;
         } else {
             filteredNodes = rpcsNodes.evm;
@@ -73,20 +84,20 @@ export default function RpcsTable({rpcsNodes}: RpcsTableType) {
         }
 
         setSortedNodes(filteredNodes);
+        console.log(filteredNodes)
     }
 
     return (
         <div className="flex flex-col min-w-0 gap-5">
             <div className="flex min-w-0 justify-between font-pingfang p-2">
-                <div className="text-lg flex items-center w-[148px]">
+                <div className="text-lg flex items-center w-[180px]">
                     RPC / REST / GRPs
                 </div>
                 <div className="flex justify-end">
                     <form className="mx-0 hidden sm:block">
                         <div className="min-w-[380px] relative">
                             <input
-                                onChange={(e) => setSearchMoniker(e.target.value)}
-                                // type="search"
+                                onChange={(e) => handleSearchMoniker(e)}
                                 className="block w-full p-3 pr-5 font-pingfang text-lg text-[#707070] bg-black border border-[#707070] rounded-full text-center focus:outline-none focus:border-[#707070] focus:ring-[#707070]"
                                 placeholder="Search mode"
                                 required
@@ -101,7 +112,6 @@ export default function RpcsTable({rpcsNodes}: RpcsTableType) {
                     <div className="sm:hidden flex justify-center items-center">
                         <button
                             className="w-10 h-10 flex items-center justify-center rounded-full bg-black border border-[#707070]"
-                            onClick={() => console.log('Search icon clicked')}
                         >
                             <svg
                                 className="w-5 h-5 text-[#707070]"
@@ -123,13 +133,13 @@ export default function RpcsTable({rpcsNodes}: RpcsTableType) {
                 </div>
             </div>
             <div className="flex justify-around sm:justify-start p-1 font-pingfang text-base">
-                <button className={`w-[130px] px-10 py-2 mx-2.5 my-[5px] rounded-full
-                        ${rpcsFilter === "cosmos" ? "text-black bg-white" : "text-white bg-primary"}`}
-                        onClick={() => setRpcsFilter("cosmos")}
+                <button className={`w-[140px] px-10 py-2 mx-2.5 my-[5px] rounded-full
+                        ${rpcFilter === "cosmos" ? "text-black bg-white" : "text-white bg-primary"}`}
+                        onClick={() => handleChangeRpcFilter("cosmos")}
                 >Cosmos</button>
                 <button className={`w-[130px] px-10 py-2 mx-2.5 my-[5px] rounded-full
-                        ${rpcsFilter === "evm" ? "text-black bg-white" : "text-white bg-primary"}`}
-                        onClick={() => setRpcsFilter("evm")}
+                        ${rpcFilter === "evm" ? "text-black bg-white" : "text-white bg-primary"}`}
+                        onClick={() => handleChangeRpcFilter("evm")}
                 >EVM</button>
             </div>
             <div>
@@ -177,7 +187,7 @@ export default function RpcsTable({rpcsNodes}: RpcsTableType) {
                         </button>
                     </div>
                 </div>
-                {sortedNodes && <NodesList rpcsNodes={sortedNodes}/>}
+                {sortedNodes && <NodesList rpcsNodes={sortedNodes} countryNames={countryNames}/>}
             </div>
         </div>
     );
