@@ -1,5 +1,5 @@
 'use client'
-import {countryNameType, RpcsNodeType} from "@/shared/config/types";
+import {RpcsNodeType} from "@/shared/config/types";
 import Image from 'next/image'
 import CopyIcon from "../../public/images/CopyIcon.svg"
 import UserIcon from "../../public/images/UserIcon.svg"
@@ -17,7 +17,6 @@ interface ExtendedRpcsNodeType extends RpcsNodeType {
 }
 
 export default function RpcNode({noder, rpcIp, uptime, tx_index, evmIp, countryNames}: ExtendedRpcsNodeType) {
-    console.log("node")
     let ip: string = "";
     if (rpcIp != null) {
         ip = rpcIp.split(':')[0];
@@ -48,9 +47,6 @@ export default function RpcNode({noder, rpcIp, uptime, tx_index, evmIp, countryN
                     setIsOpen(false);
                 }, 2000);
             })
-            .catch((err) => {
-                console.error("Ошибка копирования");
-            });
     }
 
     return (

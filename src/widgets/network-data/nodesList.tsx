@@ -1,5 +1,5 @@
 import RpcNode from "@/entities/rpcNode";
-import {countryNameType, RpcsNodeType} from "@/shared/config/types";
+import {RpcsNodeType} from "@/shared/config/types";
 
 type RpcsNodesListType = {
     rpcsNodes: RpcsNodeType[],
@@ -8,7 +8,6 @@ type RpcsNodesListType = {
 
 export default function NodesList({rpcsNodes, countryNames}: RpcsNodesListType) {
 
-    console.log("nodelist")
     return (
         <>
             {rpcsNodes.length > 0 ? (

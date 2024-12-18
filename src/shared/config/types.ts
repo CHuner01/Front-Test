@@ -44,8 +44,3 @@ export type PercentNodeType = {
     percent: number
 }
 
-export type countryNameType = {
-    ip: string,
-    name: string
-}
-

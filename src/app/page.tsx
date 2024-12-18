@@ -34,7 +34,6 @@ export default async function Home() {
     for (let i = 0; i < ipCosmosData.length; i++) {
         const currentIp = ipCosmosData[i].rpcIp.split(':')[0];
         for (let j = 0; j < data2.length; j++) {
-            console.log(currentIp, data2.ip)
             if (currentIp === data2[j].ip) {
                 countryNames.set(currentIp, data2[j].country);
                 break
@@ -45,7 +44,6 @@ export default async function Home() {
     for (let i = 0; i < ipEvmData.length; i++) {
         const currentIp = ipEvmData[i].evmIp.split(':')[0];
         for (let j = 0; j < data2.length; j++) {
-            console.log(currentIp, data2.ip)
             if (currentIp === data2[j].ip) {
                 countryNames.set(currentIp, data2[j].country);
                 break

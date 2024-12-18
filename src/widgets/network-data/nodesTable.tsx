@@ -1,5 +1,5 @@
 'use client'
-import {CosmosNodeType, countryNameType, EvmNodeType, RpcsNodeType} from "@/shared/config/types";
+import {CosmosNodeType, EvmNodeType, RpcsNodeType} from "@/shared/config/types";
 import {ChangeEvent, useEffect, useState} from "react";
 import NodesList from "@/widgets/network-data/nodesList";
 import CloseIcon from "../../../public/images/CloseIcon.svg";
@@ -29,8 +29,6 @@ export default function RpcsTable({rpcsNodes, countryNames}: RpcsTableType) {
     const [searchMoniker, setSearchMoniker] = useState<string>("");
 
     const [sortedNodes, setSortedNodes] = useState<RpcsNodeType[]>(rpcsNodes.cosmos);
-    console.log(countryNames)
-    console.log("table")
 
     function handleChangeRpcFilter(value: RpcFilterType) {
         setRpcFilter(value);
@@ -84,7 +82,6 @@ export default function RpcsTable({rpcsNodes, countryNames}: RpcsTableType) {
         }
 
         setSortedNodes(filteredNodes);
-        console.log(filteredNodes)
     }
 
     return (
